@@ -19,4 +19,4 @@ There's plenty of stuff I don't know that might be required so this list contain
 Not much is "planned" here, most of it is a spur of the moment thing but I do have some stuff I want to work on.
 
 - The ability for the User ID generator to remember what was the last generated ID even after the program has closed.
-- 
+- Ability to print out the documents on an actual printer
