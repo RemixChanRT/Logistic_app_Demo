@@ -1,4 +1,5 @@
 from user_creation import *
+from document_type import *
 from tkinter import *
 
 # The Root window in which everything is displayed
@@ -69,8 +70,10 @@ load_user.grid(row=0, column=1, padx=5, pady=5)
 manifest = Button
 
 # This is the text widget that will show the generated documents of your choice
+document_label = Label(document_frame, text="Generated Document")
+document_label.grid(row=0, column=0)
 document = Text(document_frame, width=80, height=20, state="disabled")
-document.grid(row=1, column=0)
+document.grid(row=1, column=0, padx=15, pady=15)
 
 # Below will be loaded information from the user loading part.
 # Entry widgets that show loaded data
