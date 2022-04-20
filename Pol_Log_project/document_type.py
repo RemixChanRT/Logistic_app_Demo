@@ -6,10 +6,15 @@ shipping_manifest = str(
     "Shipped by: " + "[Name of Business]" + "\n"
                                             "Sent from: \n" +
     "[Street]\n" +
-    "[Zip, City]\n" +
+    "[Zip, City]\n\n" +
     "Contact information: \n" +
     "Primary contact: " + "[Insert Phone Number here ]" + "[ Insert name of contact]\n" +
-    "Seconday contact: " + "[Insert Phone Number here ]" + "[ Insert name of contact]\n"
+    "Secondary contact: " + "[Insert Phone Number here ]" + "[ Insert name of contact]\n" +
+    "\nThe shipment contains the following:\n" +
+    "[List of items sent by the above]\n\n" +
+    "Delivery Address:\n" +
+    "[Receiver Name]\n"
+    "[Street]\n" +
+    "[Zip, City]\n\n" +
+    "Driver Signature: \n\n __________________________"
     )
-
-print(shipping_manifest)
