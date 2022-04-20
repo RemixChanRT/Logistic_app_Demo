@@ -22,6 +22,72 @@ document_frame.grid(row=0, column=1, rowspan=4)
 generator_frame = Frame(root)
 generator_frame.grid(row=3, column=0)
 
+street_receive = Entry(document_frame)
+zip_receive = Entry(document_frame)
+city_receive = Entry(document_frame)
+receive_label = Label(document_frame, text="From:")
+receive_label.grid(row=0, column=0)
+street1 = Label(document_frame, text="Street")
+street1.grid(row=1, column=0)
+street_receive.grid(row=2, column=0)
+zip1 = Label(document_frame, text="Zip")
+zip1.grid(row=3, column=0)
+zip_receive.grid(row=4, column=0)
+city1 = Label(document_frame, text="City")
+city1.grid(row=5, column=0)
+city_receive.grid(row=6, column=0)
+
+receiver_name = Entry(document_frame)
+street_deliver = Entry(document_frame)
+zip_deliver = Entry(document_frame)
+city_deliver = Entry(document_frame)
+deliver_label = Label(document_frame, text="To:")
+deliver_label.grid(row=7, column=0)
+name1 = Label(document_frame, text="Name")
+name1.grid(row=8, column=0)
+receiver_name.grid(row=9, column=0)
+street2 = Label(document_frame, text="Street")
+street2.grid(row=10, column=0)
+street_deliver.grid(row=11, column=0)
+zip2 = Label(document_frame, text="Zip")
+zip2.grid(row=12, column=0)
+zip_deliver.grid(row=13, column=0)
+city2 = Label(document_frame, text="City")
+city2.grid(row=14, column=0)
+city_deliver.grid(row=15, column=0)
+
+primary_contact = Entry(document_frame)
+secondary_contact = Entry(document_frame)
+primary1 = Label(document_frame, text="Primary Contact")
+primary1.grid(row=16, column=0)
+primary_contact.grid(row=17, column=0)
+secondary1 = Label(document_frame, text="Second Contact")
+secondary1.grid(row=18, column=0)
+secondary_contact.grid(row=19, column=0)
+
+list_items = Entry(document_frame)
+items1 = Label(document_frame, text="List Items")
+items1.grid(row=20, column=0)
+list_items.grid(row=21, column=0)
+
+
+def generated_doc():
+    doc_created = Toplevel()
+    doc_created.title("Generated Document")
+    doc_created.geometry("645x500")
+    # This is the text widget that will show the generated documents of your choice
+    global document
+    document_label = Label(doc_created, text="Generated Document")
+    document_label.grid(row=0, column=0)
+
+    document = Text(doc_created)
+
+    document.config(state="normal")
+    document.insert("1.0", shipping_doc)
+    document.config(state="disabled")
+
+    document.grid(row=1, column=0)
+
 
 def user_load():
     user = []
@@ -61,33 +127,35 @@ def user_load():
 
 
 def shipping_manifest():
-    shipping_manifest = str(
+    global shipping_doc
+    shipping_doc = str(
         "\n" + "Pol-Logistics shipping manifest\n" + "\n" + "[Name of the shipment determined by client]" + "\n" + "\n" +
         "Directions: Place the manifest in a zip-loc bag and place it on top\nof the shipping container\n" +
         "---------------------------------------------------------------------\n\n" +
         "General Information:\n" +
-        "Shipped by: " + "[Name of Business]" + "\n"
-                                                "Sent from: \n" +
-        "[Street]\n" +
-        "[Zip, City]\n\n" +
+        "Shipped by: " + str(bus_name.get()) + "\n"
+                                               "Sent from: \n" +
+        str(street_receive.get()) + "\n" +
+        str(zip_receive.get()) + " " + str(city_receive.get()) + "\n\n" +
         "Contact information: \n" +
-        "Primary contact: " + "[Insert Phone Number here ]" + "[ Insert name of contact]\n" +
-        "Secondary contact: " + "[Insert Phone Number here ]" + "[ Insert name of contact]\n" +
+        "Primary contact: " + str(primary_contact.get()) + "\n" +
+        "Secondary contact: " + str(secondary_contact.get()) + "\n" +
         "\nThe shipment contains the following:\n" +
-        "[List of items sent by the above]\n\n" +
+        str(list_items.get()) + "\n\n" +
         "Delivery Address:\n" +
-        "[Receiver Name]\n"
-        "[Street]\n" +
-        "[Zip, City]\n\n" +
+        str(receiver_name.get()) + "\n" +
+        str(street_deliver.get()) + "\n" +
+        str(zip_deliver.get()) + " " + str(city_deliver.get()) + "\n\n" +
         "Driver Signature: \n\n __________________________"
     )
+    generated_doc()
 
 
-#Create Document Button
-shipping_button = Button(generator_frame, text="", command=shipping_manifest, width=20, height=2)
+# Create Document Button
+shipping_button = Button(generator_frame, text="Generate Shp. Manifest", command=shipping_manifest, width=20, height=2)
 shipping_button.grid(row=0, column=0)
-transport_button = Button(generator_frame, text="", command=shipping_manifest, width=20, height=2)
-transport_button.grid(row=0, column=1)
+cargo_button = Button(generator_frame, text="Generate Trn. Manifest", command=shipping_manifest, width=20, height=2)
+cargo_button.grid(row=0, column=1)
 
 # Create new user button!
 new_user = Button(data_frame, text="Create new User", command=uc, width=20, height=2)
@@ -97,12 +165,6 @@ load_user = Button(data_frame, text="Load existing User", command=user_load, wid
 load_user.grid(row=0, column=1, padx=5, pady=5)
 # Manifest Generator
 manifest = Button
-
-# This is the text widget that will show the generated documents of your choice
-document_label = Label(document_frame, text="Generated Document")
-document_label.grid(row=0, column=0)
-document = Text(document_frame, state="disabled")
-document.grid(row=1, column=0, padx=15, pady=15)
 
 # Below will be loaded information from the user loading part.
 # Entry widgets that show loaded data
